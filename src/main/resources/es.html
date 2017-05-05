@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Supported keywords inside method names</title>
+</head>
+<body>
+<table class="tableblock frame-all grid-all spread" border="1">
+    <caption class="title">Table 2. Supported keywords inside method names</caption>
+    <colgroup>
+        <col style="width: 16%;">
+        <col style="width: 33%;">
+        <col style="width: 50%;">
+    </colgroup>
+    <thead>
+    <tr>
+        <th class="tableblock halign-left valign-top">Keyword</th>
+        <th class="tableblock halign-left valign-top">Sample</th>
+        <th class="tableblock halign-left valign-top">Elasticsearch Query String</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>And</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByNameAndPrice</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : [ {"field" : {"name" : "?"}},
+            {"field" : {"price" : "?"}} ]}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Or</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByNameOrPrice</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"should" : [ {"field" : {"name" : "?"}},
+            {"field" : {"price" : "?"}} ]}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Is</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByName</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"field" : {"name" : "?"}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Not</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByNameNot</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must_not" : {"field" : {"name" : "?"}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Between</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByPriceBetween</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"range" : {"price" : {"from" :
+            ?,"to" : ?,"include_lower" : true,"include_upper" : true}}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>LessThanEqual</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByPriceLessThan</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"range" : {"price" : {"from" :
+            null,"to" : ?,"include_lower" : true,"include_upper" :
+            true}}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>GreaterThanEqual</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByPriceGreaterThan</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"range" : {"price" : {"from" :
+            ?,"to" : null,"include_lower" : true,"include_upper" :
+            true}}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Before</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByPriceBefore</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"range" : {"price" : {"from" :
+            null,"to" : ?,"include_lower" : true,"include_upper" :
+            true}}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>After</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByPriceAfter</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"range" : {"price" : {"from" :
+            ?,"to" : null,"include_lower" : true,"include_upper" :
+            true}}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Like</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByNameLike</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"field" : {"name" : {"query" :
+            "?*","analyze_wildcard" : true}}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>StartingWith</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByNameStartingWith</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"field" : {"name" : {"query" :
+            "?*","analyze_wildcard" : true}}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>EndingWith</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByNameEndingWith</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"field" : {"name" : {"query" :
+            "*?","analyze_wildcard" : true}}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Contains/Containing</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByNameContaining</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"field" : {"name" : {"query" :
+            "<strong>?</strong>","analyze_wildcard" : true}}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>In</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByNameIn(Collection&lt;String&gt;names)</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"bool" : {"should" : [ {"field" :
+            {"name" : "?"}}, {"field" : {"name" : "?"}} ]}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>NotIn</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByNameNotIn(Collection&lt;String&gt;names)</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must_not" : {"bool" : {"should" : {"field" :
+            {"name" : "?"}}}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Near</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByStoreNear</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Not Supported Yet !</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>True</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByAvailableTrue</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"field" : {"available" : true}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>False</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByAvailableFalse</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"bool" : {"must" : {"field" : {"available" : false}}}}</code></p></td>
+    </tr>
+    <tr>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>OrderBy</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>findByAvailableTrueOrderByNameDesc</code></p></td>
+        <td class="tableblock halign-left valign-top"><p class="tableblock"><code>{"sort" : [{ "name" : {"order" : "desc"} }],"bool" :
+            {"must" : {"field" : {"available" : true}}}}</code></p></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一对一聊天室</title>
+    <script src="sockjs.js"></script>
+    <script src="stomp.js"></script>
+    <script src="jquery.min.js"></script>
+</head>
+<body>
+<p>
+    聊天室
+</p>
+
+<form id="wiselyForm">
+    <textarea rows="4" cols="60" name="text"></textarea>
+    <input type="submit"/>
+</form>
+
+<script>
+    $('#wiselyForm').submit(function(e){
+        e.preventDefault();
+        var text = $('#wiselyForm').find('textarea[name="text"]').val();
+        sendSpittle(text);
+    });
+
+    var sock = new SockJS("/endpointChat"); //1
+    var stomp = Stomp.over(sock);
+    stomp.connect('guest', 'guest', function(frame) {
+        stomp.subscribe("/user/queue/notifications", handleNotification);//2
+    });
+
+    function handleNotification(message) {
+        $('#output').append("<b>Received: " + message.body + "</b><br/>")
+    }
+
+    function sendSpittle(text) {
+        stomp.send("/queue/dzz2", {}, text);//3
+    }
+    $('#stop').click(function() {sock.close()});
+</script>
+
+<div id="output"></div>
+</body>
+</html>
