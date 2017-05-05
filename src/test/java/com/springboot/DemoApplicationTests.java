@@ -70,7 +70,7 @@ public class DemoApplicationTests {
         int birthYear = calendar.get(Calendar.YEAR);
 
         User user = new User();
-//        user.setId(UUID.randomUUID().toString().replaceAll("-",""));
+        user.setId(UUID.randomUUID().toString().replaceAll("-",""));
         user.setGender(genders[random.nextInt(1)]);
         StringBuilder stringBuilder = new StringBuilder(11);
         stringBuilder.append("1");
